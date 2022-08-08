@@ -28,12 +28,12 @@ def get_weather():
 #   return weather['weather'], math.floor(weather['temp'])
   url = "https://devapi.qweather.com/v7/weather/now?key=" + jpweather_id + "&location=101330101"
   res = requests.get(url).json()
-  weather = "現在溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 天空" + res['now']['text'] + ", 吹" + res['now']['windDir']
+  weather = "࿓現在溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 天空" + res['now']['text'] + ", 吹" + res['now']['windDir'] + "༄"
   return weather
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
-  return delta.days
+  return "❀ " + delta.days + " ❀"
 
 # def get_birthday():
 #   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
@@ -43,7 +43,7 @@ def get_count():
 
 def get_wedding_days():
   delta = today - datetime.strptime(wedding_date, "%Y-%m-%d")
-  return delta.days
+  return "❧ " + delta.days + " ☙"
 
 def get_words():
   words = requests.get("https://api.shadiao.pro/chp")
@@ -60,6 +60,6 @@ wm = WeChatMessage(client)
 # wea, temperature = get_weather()
 wea = get_weather()
 # "birthday_left":{"value":get_birthday()},
-data = {"weather":{"value":wea},"love_days":{"value":get_count()}, "wedding_days":{"value":get_wedding_days()}, "words":{"value":get_words(), "color":get_random_color()}}
+data = {"weather":{"value":wea, "color":get_random_color()},"love_days":{"value":get_count(), "color":get_random_color()}, "wedding_days":{"value":get_wedding_days(), "color":get_random_color()}, "words":{"value":get_words(), "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 print(res)
