@@ -22,10 +22,6 @@ jpweather_id = os.environ["JPWEATHER_ID"]
 
 
 def get_weather():
-#   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
-#   res = requests.get(url).json()
-#   weather = res['data']['list'][0]
-#   return weather['weather'], math.floor(weather['temp'])
   url = "https://devapi.qweather.com/v7/weather/now?key=" + jpweather_id + "&location=101330101"
   res = requests.get(url).json()
   weather = "࿓現在溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 會是" + res['now']['text'] + "天氣, 吹" + res['now']['windDir'] + "༄"
@@ -57,7 +53,6 @@ def get_random_color():
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
-# wea, temperature = get_weather()
 wea = get_weather()
 # "birthday_left":{"value":get_birthday()},
 data = {"weather":{"value":wea, "color":get_random_color()},"love_days":{"value":get_count(), "color":get_random_color()}, "wedding_days":{"value":get_wedding_days(), "color":get_random_color()}, "words":{"value":get_words(), "color":get_random_color()}}
