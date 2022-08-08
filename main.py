@@ -33,7 +33,7 @@ def get_weather():
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
-  return "❀ " + delta.days + " ❀"
+  return delta.days
 
 # def get_birthday():
 #   next = datetime.strptime(str(date.today().year) + "-" + birthday, "%Y-%m-%d")
@@ -43,7 +43,7 @@ def get_count():
 
 def get_wedding_days():
   delta = today - datetime.strptime(wedding_date, "%Y-%m-%d")
-  return "❧ " + delta.days + " ☙"
+  return delta.days
 
 def get_words():
   words = requests.get("https://api.shadiao.pro/chp")
