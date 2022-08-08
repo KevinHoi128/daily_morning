@@ -45,7 +45,7 @@ def get_words():
 #   words = requests.get("https://api.shadiao.pro/chp")
 #   if words.status_code != 200:
     words = requests.get("https://api.uomg.com/api/rand.qinghua?format=json")
-    return "❤" + words.content + "❤"
+    return words.content
 #   return words.json()['data']['text']
 
 def get_random_color():
