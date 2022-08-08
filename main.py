@@ -17,12 +17,18 @@ app_secret = os.environ["APP_SECRET"]
 user_id = os.environ["USER_ID"]
 template_id = os.environ["TEMPLATE_ID"]
 
+jpweather_id = os.environ["JPWEATHER_ID"]
+
 
 def get_weather():
-  url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
+#   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
+#   res = requests.get(url).json()
+#   weather = res['data']['list'][0]
+#   return weather['weather'], math.floor(weather['temp'])
+  url = "https://devapi.qweather.com/v7/weather/now?key=" + jpweather_id + "&location=101330101"
   res = requests.get(url).json()
-  weather = res['data']['list'][0]
-  return weather['weather'], math.floor(weather['temp'])
+  weather = "溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 天空" + res['now']['text'] + ", 吹" + res['now']['windDir']
+  return weather
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
