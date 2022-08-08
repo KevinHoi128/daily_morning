@@ -10,6 +10,7 @@ today = datetime.now()
 start_date = os.environ['START_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
+wedding_date = os.environ['WEDDING_DATE']
 
 app_id = os.environ["APP_ID"]
 app_secret = os.environ["APP_SECRET"]
@@ -27,7 +28,7 @@ def get_weather():
 #   return weather['weather'], math.floor(weather['temp'])
   url = "https://devapi.qweather.com/v7/weather/now?key=" + jpweather_id + "&location=101330101"
   res = requests.get(url).json()
-  weather = "溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 天空" + res['now']['text'] + ", 吹" + res['now']['windDir']
+  weather = "現在溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 天空" + res['now']['text'] + ", 吹" + res['now']['windDir']
   return weather
 
 def get_count():
@@ -40,6 +41,10 @@ def get_count():
 #     next = next.replace(year=next.year + 1)
 #   return (next - today).days
 
+def get_wedding_days():
+  delta = today - datetime.strptime(start_date, "%Y-%m-%d")
+  return delta.days
+
 def get_words():
   words = requests.get("https://api.shadiao.pro/chp")
   if words.status_code != 200:
@@ -49,13 +54,12 @@ def get_words():
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
-
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 # wea, temperature = get_weather()
 wea = get_weather()
 # "birthday_left":{"value":get_birthday()},
-data = {"weather":{"value":wea},"love_days":{"value":get_count()},"words":{"value":get_words(), "color":get_random_color()}}
+data = {"weather":{"value":wea},"love_days":{"value":get_count()}, "wedding_days":{"value":get_wedding_days()}, "words":{"value":get_words(), "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 print(res)
