@@ -42,7 +42,7 @@ def get_count():
 #   return (next - today).days
 
 def get_wedding_days():
-  delta = today - datetime.strptime(start_date, "%Y-%m-%d")
+  delta = today - datetime.strptime(wedding_date, "%Y-%m-%d")
   return delta.days
 
 def get_words():
