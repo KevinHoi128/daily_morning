@@ -31,3 +31,4 @@ jobs:
       BIRTHDAY: ${{ secrets.BIRTHDAY }}
       CITY: ${{ secrets.CITY }}
       JPWEATHER_ID: ${{ secrets.JPWEATHER_ID }}
+      WEDDING_DATE: ${{ secrets.WEDDING_DATE }}
