@@ -28,7 +28,7 @@ def get_weather():
 #   return weather['weather'], math.floor(weather['temp'])
   url = "https://devapi.qweather.com/v7/weather/now?key=" + jpweather_id + "&location=101330101"
   res = requests.get(url).json()
-  weather = "࿓現在溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 天空" + res['now']['text'] + ", 吹" + res['now']['windDir'] + "༄"
+  weather = "࿓現在溫度:" + res['now']['temp'] + "度, 體感溫度:" + res['now']['temp'] + "度, 會是" + res['now']['text'] + "天氣, 吹" + res['now']['windDir'] + "༄"
   return weather
 
 def get_count():
